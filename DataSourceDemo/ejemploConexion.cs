@@ -31,5 +31,26 @@ namespace DataSourceDemo
             this.customersTableAdapter.Fill(this.northwindDataSet.Customers);
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // llamamos al customerBindingSource y el metodo que queremos ejecutar
+            customersBindingSource.AddNew(); 
+        }
+
+        private void toolStripTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13) {
+                var index = customersBindingSource.Find("customerID", toolStripTextBox1);
+                  if (index > -1)
+                  {
+                      customersBindingSource.Position = index;
+                      return;
+                  }
+                  else {
+                      MessageBox.Show("Elemento no encontrado");
+                  }
+            }
+        }
     }
 }
